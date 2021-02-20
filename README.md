@@ -34,4 +34,4 @@
 
 ตัวอย่าง Code สำหรับอ่านค่าจาก Proximity Sensor จำนวน 1 ตัว เพื่อนับจำนวนที่ตรวจจับวัตถุได้ และส่งผลลัพธ์ไปยัง Local Broker
 
-- [ตัวอย่าง Code คลิกที่นี้](README.md)
+- [ตัวอย่าง Code คลิกที่นี้](node-red/Counter.json)
