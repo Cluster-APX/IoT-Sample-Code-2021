@@ -1,9 +1,8 @@
 /*
  * เชื่อมต่อไปยัง MQTT Broker ผ่าน WiFi
  * แสดงผลการทำงาน (Debug Message) ผ่าน Serial Port
- * Subscribe ไปยัง Topic ที่ต้องการและแสดงผลลัพธ์ผ่าน Serial Port
- * อ่านค่า Analog และ Digital เพื่อแสดงค่าทั้งหมดที่อ่านได้ผ่านทาง Serial Port
- * เขียนค่า Digital เพื่อควบคุม Relay ที่ต่อกับหลอดไฟและ Buzzer
+ * Publish ข้อมูลของ Sensor ที่อ่านได้หลายตัวไปยัง Thingsboard Cloud
+ * Subscribe ไปยัง Topic ที่ Thingsboard Cloud กำหนดเพื่อรับรับคำสั่ง (RPC) และตอบกลับ
  */
 
 
@@ -36,7 +35,7 @@ EspMQTTClient client
   "My-IoT-Network", // SSID, ชื่อ WiFi ที่ต้องการเชื่อมต่อ
   "mywifipassword", // WiFi Password
   "thingsboard.cloud",  // MQTT Broker Address
-  "ใส่ token ของ device ที่ต้องการ",   // MQTT Username
+  "Token",   // MQTT Username
   "",   // MQRR Password
   "MyDeviceID-7186243",     // MQTT Device ID
   1883              // MQTT Port
@@ -87,31 +86,21 @@ void onConnectionEstablished()
   {
 
     deserializeJson(doc, payload);
-    String res_num = topic.substring(26);
+    String responseTopic = String(topic);
+    responseTopic.replace("request", "response");
 
-    Serial.println("Request/Response ID " + res_num);
-
-    if(doc["method"] == "getLightRed")  // Thingsboard ตรวจสอบสถานะ Device
+    if(doc["method"] == "setLightRed")  // Thingsboard ส่งค่า Method สำหรับควบคุม Device
     {
 
-      Serial.println("Status Check");
-      
-      // ตอบกลับการตรวจสอบสถานะของ Thingsboard
-      client.publish("v1/devices/me/rpc/response/" + res_num, "true");
-      
-    }
-    else if (doc["method"] == "setLightRed")  // Thingsboard ส่งค่า Method สำหรับควบคุม Device
-    {
-
-      Serial.println("Set Value");
-      
       if(doc["params"] == true) // Thingsboard ส่งค่า Parameter สำหรับเปิดไฟ
       {
         digitalWrite(OUT_DIGI_0, LOW);
+        client.publish(responseTopic, "1");
       }
       else if(doc["params"] == false) // Thingsboard ส่งค่า Parameter สำหรับปิดไฟ
       {
         digitalWrite(OUT_DIGI_0, HIGH);
+        client.publish(responseTopic, "0");
       }
 
     }

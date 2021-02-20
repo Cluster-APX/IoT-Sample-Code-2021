@@ -22,6 +22,12 @@
 
 - [ตัวอย่าง Code คลิกที่นี้](arduino/ESP32_-_Send_and_Receive_MQTT/ESP32_-_Send_and_Receive_MQTT.ino)
 
+### RPC Thingsboard
+
+ตัวอย่าง Code สำหรับการสื่อสารระหว่าง ESP32 และ Thignsboard Cloud เพื่อแสดงข้อมูลที่อ่านได้จาก Sensor หลายชนิด รวมถึงการรับคำสั่ง (RPC) เพื่อใช้ในการควบคุมอุปกรณ์ (Device, ESP32)
+
+- [ตัวอย่าง Code คลิกที่นี้](arduino/ESP32_-_RPC_Thingsboard/ESP32_-_RPC_Thingsboard.ino)
+
 ## Node-RED
 
 ### Average Temperature
