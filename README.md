@@ -28,7 +28,7 @@
 
 ตัวอย่าง Code สำหรับการอ่านค่าจาก Temperature Sensor จำนวน 3 ตัว เพื่อหาต่าเฉลี่ยของอุณภูมิห้อง และส่งผลลัพธ์ไปยัง Local Broker
 
-- [ตัวอย่าง Code คลิกที่นี้](README.md)
+- [ตัวอย่าง Code คลิกที่นี้](node-red/Average%20Temperature.json)
 
 ### Counter
 

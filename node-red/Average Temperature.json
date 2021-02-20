@@ -1,0 +1,368 @@
+[
+    {
+        "id": "8289cf80.f615",
+        "type": "tab",
+        "label": "Average Temperature",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d448eaa4.33c8b8",
+        "type": "mqtt in",
+        "z": "8289cf80.f615",
+        "name": "อ่านค่า Sensor จาก Local Broker",
+        "topic": "room/1/sensor/temperature/+",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "f76af989.770418",
+        "x": 170,
+        "y": 260,
+        "wires": [
+            [
+                "d60f1b78.6e42f8",
+                "c684edcf.56ae7"
+            ]
+        ]
+    },
+    {
+        "id": "d60f1b78.6e42f8",
+        "type": "debug",
+        "z": "8289cf80.f615",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "aa06eb94.e077f8",
+        "type": "inject",
+        "z": "8289cf80.f615",
+        "name": "เริ่มต้นโปรแกรม (ครั้งเดียว)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 60,
+        "wires": [
+            [
+                "fd1ebe09.b23e6"
+            ]
+        ]
+    },
+    {
+        "id": "fd1ebe09.b23e6",
+        "type": "change",
+        "z": "8289cf80.f615",
+        "name": "ประกาศตัวแปร",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data_temp_0",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "data_temp_1",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "data_temp_2",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6e814090.5e8cf",
+        "type": "function",
+        "z": "8289cf80.f615",
+        "name": "คำนวนอุณหภูมิเฉลี่ย",
+        "func": "msg.payload = (parseFloat(msg.temp_0) + parseFloat(msg.temp_1) + parseFloat(msg.temp_2)) / 3.0;\nmsg.topic   = \"fibo/room/1/temperature\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 690,
+        "y": 600,
+        "wires": [
+            [
+                "f38793b7.621f2"
+            ]
+        ]
+    },
+    {
+        "id": "e731f977.d4eb58",
+        "type": "change",
+        "z": "8289cf80.f615",
+        "name": "อ่านค่าตัวแปรทั้ง 3 ตัว",
+        "rules": [
+            {
+                "t": "set",
+                "p": "temp_0",
+                "pt": "msg",
+                "to": "data_temp_0",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "temp_1",
+                "pt": "msg",
+                "to": "data_temp_1",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "temp_2",
+                "pt": "msg",
+                "to": "data_temp_2",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 600,
+        "wires": [
+            [
+                "6e814090.5e8cf"
+            ]
+        ]
+    },
+    {
+        "id": "f38793b7.621f2",
+        "type": "debug",
+        "z": "8289cf80.f615",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "c684edcf.56ae7",
+        "type": "switch",
+        "z": "8289cf80.f615",
+        "name": "เลือกเส้นทางข้อมูลจากชื่อ Topic",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "room/1/sensor/temperature/0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "room/1/sensor/temperature/1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "room/1/sensor/temperature/2",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 510,
+        "y": 320,
+        "wires": [
+            [
+                "bdb4c71e.f22538"
+            ],
+            [
+                "61ff8e99.c332c"
+            ],
+            [
+                "c4c4041b.b34758"
+            ]
+        ]
+    },
+    {
+        "id": "bdb4c71e.f22538",
+        "type": "change",
+        "z": "8289cf80.f615",
+        "name": "เก็บค่าที่อ่านได้ลงในตัวแปร data_temp_0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data_temp_0",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 910,
+        "y": 280,
+        "wires": [
+            [
+                "c8fcd3be.059b"
+            ]
+        ]
+    },
+    {
+        "id": "1c9a06ff.5e7009",
+        "type": "inject",
+        "z": "8289cf80.f615",
+        "name": "ทำงานทุก 0.5 วินาที",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 150,
+        "y": 600,
+        "wires": [
+            [
+                "e731f977.d4eb58"
+            ]
+        ]
+    },
+    {
+        "id": "61ff8e99.c332c",
+        "type": "change",
+        "z": "8289cf80.f615",
+        "name": "เก็บค่าที่อ่านได้ลงในตัวแปร data_temp_1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data_temp_1",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 910,
+        "y": 320,
+        "wires": [
+            [
+                "c8fcd3be.059b"
+            ]
+        ]
+    },
+    {
+        "id": "c4c4041b.b34758",
+        "type": "change",
+        "z": "8289cf80.f615",
+        "name": "เก็บค่าที่อ่านได้ลงในตัวแปร data_temp_2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data_temp_2",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 910,
+        "y": 360,
+        "wires": [
+            [
+                "c8fcd3be.059b"
+            ]
+        ]
+    },
+    {
+        "id": "c8fcd3be.059b",
+        "type": "debug",
+        "z": "8289cf80.f615",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1240,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "f76af989.770418",
+        "type": "mqtt-broker",
+        "name": "My Local Broker",
+        "broker": "192.168.1.111",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]
