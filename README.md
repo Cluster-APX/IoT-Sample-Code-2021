@@ -1,6 +1,6 @@
 # IoT-Sample-Code-2021
 
-ตัวอย่าง Code เกี่ยวกับการรับ-ส่งข้อมูลและการสร้าง Service Application (NODE-Red) โดยใช้ ESP32, Local Broker (mosquitto) และ Dashboard (Thingsboard Cloud) สื่อสารด้วย MQTT Protocol
+ตัวอย่าง Code เกี่ยวกับการรับ-ส่งข้อมูลและการสร้าง Service Application (Node-RED) โดยใช้ ESP32, Local Broker (mosquitto) และ Dashboard (Thingsboard Cloud) สื่อสารด้วย MQTT Protocol
 
 ## Arduino
 
@@ -24,13 +24,13 @@
 
 ## Node-RED
 
-### Temperature Sensor
+### Average Temperature
 
 ตัวอย่าง Code สำหรับการอ่านค่าจาก Temperature Sensor จำนวน 3 ตัว เพื่อหาต่าเฉลี่ยของอุณภูมิห้อง และส่งผลลัพธ์ไปยัง Local Broker
 
 - [ตัวอย่าง Code คลิกที่นี้](README.md)
 
-### Counter Sensor
+### Counter
 
 ตัวอย่าง Code สำหรับอ่านค่าจาก Proximitry Sensor จำนวน 1 ตัว เพื่อนับจำนวนที่ตรวจจับวัตถุได้ และส่งผลลัพธ์ไปยัง Local Broker
 
