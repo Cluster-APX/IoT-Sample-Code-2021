@@ -1,0 +1,337 @@
+[
+    {
+        "id": "e51119fa.12d098",
+        "type": "tab",
+        "label": "Counter",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "70e4c268.4559ec",
+        "type": "mqtt in",
+        "z": "e51119fa.12d098",
+        "name": "อ่านค่า Sensor จาก Local Broker",
+        "topic": "room/1/sensor/detection/0",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "f76af989.770418",
+        "x": 170,
+        "y": 260,
+        "wires": [
+            [
+                "ef81b73c.d2f4f8",
+                "ed73aaf5.88b8c8"
+            ]
+        ]
+    },
+    {
+        "id": "ef81b73c.d2f4f8",
+        "type": "debug",
+        "z": "e51119fa.12d098",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "c6789cb2.74d42",
+        "type": "inject",
+        "z": "e51119fa.12d098",
+        "name": "เริ่มต้นโปรแกรม (ครั้งเดียว)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 60,
+        "wires": [
+            [
+                "a2542117.b7e88"
+            ]
+        ]
+    },
+    {
+        "id": "a2542117.b7e88",
+        "type": "change",
+        "z": "e51119fa.12d098",
+        "name": "ประกาศตัวแปร",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data_counter",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "data_state",
+                "pt": "flow",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "40a21a51.463044",
+        "type": "change",
+        "z": "e51119fa.12d098",
+        "name": "เก็บค่าที่อ่านได้ลงในตัวแปร data_state",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data_state",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 990,
+        "y": 520,
+        "wires": [
+            [
+                "db459a04.214b18"
+            ]
+        ]
+    },
+    {
+        "id": "db459a04.214b18",
+        "type": "debug",
+        "z": "e51119fa.12d098",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "180dbfc2.90223",
+        "type": "inject",
+        "z": "e51119fa.12d098",
+        "name": "Reset ค่า Counter",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 100,
+        "wires": [
+            [
+                "a2542117.b7e88"
+            ]
+        ]
+    },
+    {
+        "id": "54357e9e.40682",
+        "type": "switch",
+        "z": "e51119fa.12d098",
+        "name": "ตรวจสอบข้อมูลสถานะปัจจุบัน",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 180,
+        "y": 380,
+        "wires": [
+            [
+                "7ec78e3a.3df15"
+            ],
+            [
+                "40a21a51.463044"
+            ]
+        ]
+    },
+    {
+        "id": "7ec78e3a.3df15",
+        "type": "switch",
+        "z": "e51119fa.12d098",
+        "name": "เปรียบเทียบค่าสถานะข้อมูลปัจจุบันกับข้อมูลเก่า",
+        "property": "data_state_prev",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 570,
+        "y": 380,
+        "wires": [
+            [
+                "a7d7224f.e815c"
+            ],
+            [
+                "40a21a51.463044"
+            ]
+        ]
+    },
+    {
+        "id": "ed73aaf5.88b8c8",
+        "type": "change",
+        "z": "e51119fa.12d098",
+        "name": "อ่านค่าสถานะของข้อมูลเก่า",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data_state_prev",
+                "pt": "msg",
+                "to": "data_state",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 260,
+        "wires": [
+            [
+                "54357e9e.40682",
+                "2330dedb.978e22"
+            ]
+        ]
+    },
+    {
+        "id": "2330dedb.978e22",
+        "type": "debug",
+        "z": "e51119fa.12d098",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "a7d7224f.e815c",
+        "type": "function",
+        "z": "e51119fa.12d098",
+        "name": "นับจำนวนเพิ่มขึ้นเท่ากับ 1",
+        "func": "// read counter\nvar counter = flow.get(\"data_counter\");\n// convert to int\ncounter = parseInt(counter);\n\n// increase 1\ncounter    = counter + 1;\n\n// write new counter value\nflow.set(\"data_counter\", counter);\n\n// set data for debug\nmsg.counter    = counter;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 950,
+        "y": 380,
+        "wires": [
+            [
+                "40a21a51.463044",
+                "426a0b0e.737584"
+            ]
+        ]
+    },
+    {
+        "id": "426a0b0e.737584",
+        "type": "debug",
+        "z": "e51119fa.12d098",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1190,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "f76af989.770418",
+        "type": "mqtt-broker",
+        "name": "My Local Broker",
+        "broker": "192.168.1.111",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]
