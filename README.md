@@ -1,4 +1,4 @@
-# IoT-Sample-Code-2021
+# IoT Sample Code 2021
 
 ตัวอย่าง Code เกี่ยวกับการรับ-ส่งข้อมูลและการสร้าง Service Application (Node-RED) โดยใช้ ESP32, Local Broker (mosquitto) และ Dashboard (Thingsboard Cloud) สื่อสารด้วย MQTT Protocol
 
