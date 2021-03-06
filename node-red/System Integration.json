@@ -1,0 +1,1642 @@
+[
+    {
+        "id": "7c7c6064.4c077",
+        "type": "tab",
+        "label": "ตั้งค่าตัวแปรทั้งหมด",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "34577fb7.665e6",
+        "type": "tab",
+        "label": "Node-RED + ESP32",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "fe8f35d3.732268",
+        "type": "tab",
+        "label": "Node-RED + OpenCV",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "63bd7392.fd0a7c",
+        "type": "tab",
+        "label": "Node-RED + Thingsboard",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "9e4b6dd5.63eed",
+        "type": "mqtt-broker",
+        "name": "thingsboard.cloud (device 1)",
+        "broker": "thingsboard.cloud",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "94c901eb.099a1",
+        "type": "serial-port",
+        "serialport": "/dev/ttyS3",
+        "serialbaud": "115200",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": " ",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "abd216b1.5bdf98",
+        "type": "mqtt-broker",
+        "name": "Factory MQTT Broker",
+        "broker": "192.168.1.111",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "9cc03e29.1252a",
+        "type": "inject",
+        "z": "7c7c6064.4c077",
+        "name": "เริ่มต้นโปรแกรม (อัตโนมัติ, ครั้งเดียว)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 340,
+        "wires": [
+            [
+                "d75cd45f.41f408",
+                "5dbb3236.d7675c",
+                "1ceaf534.592d1b",
+                "54dafb43.20b714",
+                "55ebdf34.ce194",
+                "27b5c273.0801ee",
+                "d70a7ab9.e1b408",
+                "e5e45a65.bd6588",
+                "a1b5ad2a.abd82"
+            ]
+        ]
+    },
+    {
+        "id": "5dbb3236.d7675c",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "ประกาศตัวแปร counter_input_data",
+        "rules": [
+            {
+                "t": "set",
+                "p": "counter_input_data",
+                "pt": "global",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "54dafb43.20b714",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "ประกาศตัวแปร time_start",
+        "rules": [
+            {
+                "t": "set",
+                "p": "time_start",
+                "pt": "global",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1ceaf534.592d1b",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "ประกาศตัวแปร counter_output_data",
+        "rules": [
+            {
+                "t": "set",
+                "p": "counter_output_data",
+                "pt": "global",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d75cd45f.41f408",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "ประกาศตัวแปร machine_state",
+        "rules": [
+            {
+                "t": "set",
+                "p": "machine_state",
+                "pt": "global",
+                "to": "OFF",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "55ebdf34.ce194",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "ประกาศตัวแปร time_current",
+        "rules": [
+            {
+                "t": "set",
+                "p": "time_current",
+                "pt": "global",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4109be58.d62a8",
+        "type": "comment",
+        "z": "7c7c6064.4c077",
+        "name": "กำหนดการทำงานของเครื่องจักร (เปิด/ปิด)",
+        "info": "",
+        "x": 970,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "d5690277.457ec",
+        "type": "comment",
+        "z": "7c7c6064.4c077",
+        "name": "นับชิ้นงานเข้า-ออกจากระบบ",
+        "info": "",
+        "x": 930,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "b5bf3a94.0f4968",
+        "type": "comment",
+        "z": "7c7c6064.4c077",
+        "name": "นับเวลาเริ่มต้น-ปัจจุบัน เพื่อคำนวนอัตรการผลิต",
+        "info": "",
+        "x": 980,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "27b5c273.0801ee",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "ประกาศตัวแปร productivity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "productivity",
+                "pt": "global",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "69168e82.762f9",
+        "type": "comment",
+        "z": "7c7c6064.4c077",
+        "name": "อัตรการผลิต",
+        "info": "",
+        "x": 880,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "83501e82.48a7f",
+        "type": "change",
+        "z": "34577fb7.665e6",
+        "name": "เก็บค่าที่อ่านได้ลงในตัวแปร counter_input_state",
+        "rules": [
+            {
+                "t": "set",
+                "p": "counter_input_state",
+                "pt": "global",
+                "to": "sensor_input",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a708b704.e68d38",
+        "type": "switch",
+        "z": "34577fb7.665e6",
+        "name": "ตรวจสอบข้อมูลสถานะปัจจุบัน",
+        "property": "sensor_input",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 280,
+        "y": 860,
+        "wires": [
+            [
+                "4f0d3e5a.b8fd3"
+            ],
+            [
+                "83501e82.48a7f"
+            ]
+        ]
+    },
+    {
+        "id": "4f0d3e5a.b8fd3",
+        "type": "switch",
+        "z": "34577fb7.665e6",
+        "name": "เปรียบเทียบค่าสถานะข้อมูลปัจจุบันกับข้อมูลเก่า",
+        "property": "counter_input_state",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 610,
+        "y": 840,
+        "wires": [
+            [
+                "4be2c957.299a08"
+            ],
+            [
+                "83501e82.48a7f"
+            ]
+        ]
+    },
+    {
+        "id": "4be2c957.299a08",
+        "type": "function",
+        "z": "34577fb7.665e6",
+        "name": "นับจำนวนเพิ่มขึ้นเท่ากับ 1",
+        "func": "// read counter\nvar counter = global.get(\"counter_input_data\");\n// convert to int\ncounter = parseInt(counter);\n\n// increase 1\ncounter    = counter + 1;\n\n// write new counter value\nglobal.set(\"counter_input_data\", counter);\n\n// set data for debug\nmsg.counter    = counter;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 930,
+        "y": 820,
+        "wires": [
+            [
+                "83501e82.48a7f",
+                "8861d813.c9d5f8"
+            ]
+        ]
+    },
+    {
+        "id": "11dee361.7a1a9d",
+        "type": "inject",
+        "z": "34577fb7.665e6",
+        "name": "จำลองการอ่านค่า Sensor จาก Serial Port (ปกติ)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "45.5 1 1",
+        "payloadType": "str",
+        "x": 230,
+        "y": 340,
+        "wires": [
+            [
+                "f0aab6c9.9f69f8"
+            ]
+        ]
+    },
+    {
+        "id": "f0aab6c9.9f69f8",
+        "type": "function",
+        "z": "34577fb7.665e6",
+        "name": "แยกข้อมูลตาม Protocol",
+        "func": "var data    = msg.payload.split(' ');\nvar temperature     = data[0];\nvar sensor_input    = data[1];\nvar sensor_output   = data[2];\n\nmsg.temperature     = temperature;\nmsg.sensor_input    = sensor_input;\nmsg.sensor_output   = sensor_output;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 660,
+        "y": 400,
+        "wires": [
+            [
+                "e84f283e.3c30e8",
+                "4b08016f.baf8c"
+            ]
+        ]
+    },
+    {
+        "id": "b8c07516.f768d8",
+        "type": "inject",
+        "z": "34577fb7.665e6",
+        "name": "จำลองการอ่านค่า Sensor จาก Serial Port (ของเข้า)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50.25 0 1",
+        "payloadType": "str",
+        "x": 240,
+        "y": 400,
+        "wires": [
+            [
+                "f0aab6c9.9f69f8"
+            ]
+        ]
+    },
+    {
+        "id": "c70077d1.8f37e8",
+        "type": "inject",
+        "z": "34577fb7.665e6",
+        "name": "จำลองการอ่านค่า Sensor จาก Serial Port (ของออก)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "55.55 1 0",
+        "payloadType": "str",
+        "x": 240,
+        "y": 460,
+        "wires": [
+            [
+                "f0aab6c9.9f69f8"
+            ]
+        ]
+    },
+    {
+        "id": "52cc0678.a480a8",
+        "type": "comment",
+        "z": "34577fb7.665e6",
+        "name": "นับของเข้าสู่ระบบ",
+        "info": "",
+        "x": 240,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "cf9af5aa.735748",
+        "type": "change",
+        "z": "34577fb7.665e6",
+        "name": "เก็บค่าที่อ่านได้ลงในตัวแปร counter_output_state",
+        "rules": [
+            {
+                "t": "set",
+                "p": "counter_output_state",
+                "pt": "global",
+                "to": "sensor_output",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 1280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a8a3df8d.c448a",
+        "type": "switch",
+        "z": "34577fb7.665e6",
+        "name": "ตรวจสอบข้อมูลสถานะปัจจุบัน",
+        "property": "sensor_output",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 280,
+        "y": 1180,
+        "wires": [
+            [
+                "d2f8f1b7.d58a9"
+            ],
+            [
+                "cf9af5aa.735748"
+            ]
+        ]
+    },
+    {
+        "id": "d2f8f1b7.d58a9",
+        "type": "switch",
+        "z": "34577fb7.665e6",
+        "name": "เปรียบเทียบค่าสถานะข้อมูลปัจจุบันกับข้อมูลเก่า",
+        "property": "counter_output_state",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 610,
+        "y": 1160,
+        "wires": [
+            [
+                "4f36f26b.8c8b9c"
+            ],
+            [
+                "cf9af5aa.735748"
+            ]
+        ]
+    },
+    {
+        "id": "4f36f26b.8c8b9c",
+        "type": "function",
+        "z": "34577fb7.665e6",
+        "name": "นับจำนวนเพิ่มขึ้นเท่ากับ 1",
+        "func": "// read counter\nvar counter = global.get(\"counter_output_data\");\n// convert to int\ncounter = parseInt(counter);\n\n// increase 1\ncounter    = counter + 1;\n\n// write new counter value\nglobal.set(\"counter_output_data\", counter);\n\n// set data for debug\nmsg.counter    = counter;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 930,
+        "y": 1140,
+        "wires": [
+            [
+                "cf9af5aa.735748",
+                "4ab03d6d.a67e84"
+            ]
+        ]
+    },
+    {
+        "id": "66e0c2e2.b224fc",
+        "type": "comment",
+        "z": "34577fb7.665e6",
+        "name": "นับของออกระบบ",
+        "info": "",
+        "x": 240,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "e84f283e.3c30e8",
+        "type": "link out",
+        "z": "34577fb7.665e6",
+        "name": "",
+        "links": [
+            "5857df00.8875a",
+            "b683d224.df6e9",
+            "e1609d30.57ebc"
+        ],
+        "x": 915,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "5857df00.8875a",
+        "type": "link in",
+        "z": "34577fb7.665e6",
+        "name": "",
+        "links": [
+            "e84f283e.3c30e8"
+        ],
+        "x": 75,
+        "y": 860,
+        "wires": [
+            [
+                "a708b704.e68d38"
+            ]
+        ]
+    },
+    {
+        "id": "b683d224.df6e9",
+        "type": "link in",
+        "z": "34577fb7.665e6",
+        "name": "",
+        "links": [
+            "e84f283e.3c30e8"
+        ],
+        "x": 75,
+        "y": 1180,
+        "wires": [
+            [
+                "a8a3df8d.c448a"
+            ]
+        ]
+    },
+    {
+        "id": "af4a8f75.92f26",
+        "type": "comment",
+        "z": "7c7c6064.4c077",
+        "name": "กำหนดค่าตัวแปรแบบ Global เพื่อใช้งานร่วมกันข้าม Flow ได้",
+        "info": "",
+        "x": 220,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "d70a7ab9.e1b408",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "ประกาศตัวแปร machine_temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "machine_temperature",
+                "pt": "global",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "90b3170b.1a5678",
+        "type": "comment",
+        "z": "7c7c6064.4c077",
+        "name": "อุณหภูมิเครื่องจักร",
+        "info": "",
+        "x": 900,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "8f9f8a7f.a4c3a8",
+        "type": "inject",
+        "z": "7c7c6064.4c077",
+        "name": "อ่านค่าตัวแปร machine_state",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 180,
+        "y": 820,
+        "wires": [
+            [
+                "c4929341.11e23"
+            ]
+        ]
+    },
+    {
+        "id": "45073a5a.dafa44",
+        "type": "debug",
+        "z": "7c7c6064.4c077",
+        "name": "แสดงข้อมูลในตัวแปร msg.payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "c4929341.11e23",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "machine_state",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 820,
+        "wires": [
+            [
+                "45073a5a.dafa44"
+            ]
+        ]
+    },
+    {
+        "id": "498e1cc.e6c3ee4",
+        "type": "inject",
+        "z": "7c7c6064.4c077",
+        "name": "อ่านค่าตัวแปร machine_temperature",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 200,
+        "y": 860,
+        "wires": [
+            [
+                "e8b0d9e7.4501a8"
+            ]
+        ]
+    },
+    {
+        "id": "e8b0d9e7.4501a8",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "machine_temperature",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 860,
+        "wires": [
+            [
+                "45073a5a.dafa44"
+            ]
+        ]
+    },
+    {
+        "id": "65b8e726.079a18",
+        "type": "inject",
+        "z": "7c7c6064.4c077",
+        "name": "อ่านค่าตัวแปร counter_input_data",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 190,
+        "y": 920,
+        "wires": [
+            [
+                "783a9699.fc1608"
+            ]
+        ]
+    },
+    {
+        "id": "783a9699.fc1608",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "counter_input_data",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 920,
+        "wires": [
+            [
+                "45073a5a.dafa44"
+            ]
+        ]
+    },
+    {
+        "id": "8b6e6f45.4def8",
+        "type": "inject",
+        "z": "7c7c6064.4c077",
+        "name": "อ่านค่าตัวแปร counter_input_state",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 190,
+        "y": 960,
+        "wires": [
+            [
+                "db32811c.fe02b"
+            ]
+        ]
+    },
+    {
+        "id": "db32811c.fe02b",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "counter_input_state",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 960,
+        "wires": [
+            [
+                "45073a5a.dafa44"
+            ]
+        ]
+    },
+    {
+        "id": "f20de573.5fdb78",
+        "type": "inject",
+        "z": "7c7c6064.4c077",
+        "name": "อ่านค่าตัวแปร counter_output_data",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 190,
+        "y": 1000,
+        "wires": [
+            [
+                "d514ed16.3144c"
+            ]
+        ]
+    },
+    {
+        "id": "d514ed16.3144c",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "counter_output_data",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 1000,
+        "wires": [
+            [
+                "45073a5a.dafa44"
+            ]
+        ]
+    },
+    {
+        "id": "a7100fbc.969af",
+        "type": "inject",
+        "z": "7c7c6064.4c077",
+        "name": "อ่านค่าตัวแปร counter_output_state",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 200,
+        "y": 1040,
+        "wires": [
+            [
+                "7d89f81e.841138"
+            ]
+        ]
+    },
+    {
+        "id": "7d89f81e.841138",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "counter_output_state",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 1040,
+        "wires": [
+            [
+                "45073a5a.dafa44"
+            ]
+        ]
+    },
+    {
+        "id": "b661294b.5fe778",
+        "type": "inject",
+        "z": "7c7c6064.4c077",
+        "name": "อ่านค่าตัวแปร time_start",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 160,
+        "y": 1100,
+        "wires": [
+            [
+                "3c671190.9bf7ce"
+            ]
+        ]
+    },
+    {
+        "id": "3c671190.9bf7ce",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "time_start",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 1100,
+        "wires": [
+            [
+                "45073a5a.dafa44"
+            ]
+        ]
+    },
+    {
+        "id": "e5e45a65.bd6588",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "ประกาศตัวแปร counter_input_state",
+        "rules": [
+            {
+                "t": "set",
+                "p": "counter_input_state",
+                "pt": "global",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a1b5ad2a.abd82",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "ประกาศตัวแปร counter_output_state",
+        "rules": [
+            {
+                "t": "set",
+                "p": "counter_output_state",
+                "pt": "global",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "30c6f2b9.baeb0e",
+        "type": "inject",
+        "z": "7c7c6064.4c077",
+        "name": "อ่านค่าตัวแปร time_current",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 170,
+        "y": 1140,
+        "wires": [
+            [
+                "9a08c828.6e8368"
+            ]
+        ]
+    },
+    {
+        "id": "9a08c828.6e8368",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "time_current",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 1140,
+        "wires": [
+            [
+                "45073a5a.dafa44"
+            ]
+        ]
+    },
+    {
+        "id": "a5575903.861a38",
+        "type": "inject",
+        "z": "7c7c6064.4c077",
+        "name": "อ่านค่าตัวแปร productivity",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 170,
+        "y": 1180,
+        "wires": [
+            [
+                "178fdb30.2ad425"
+            ]
+        ]
+    },
+    {
+        "id": "178fdb30.2ad425",
+        "type": "change",
+        "z": "7c7c6064.4c077",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "productivity",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 1180,
+        "wires": [
+            [
+                "45073a5a.dafa44"
+            ]
+        ]
+    },
+    {
+        "id": "1d1ae15c.74563f",
+        "type": "inject",
+        "z": "fe8f35d3.732268",
+        "name": "สั่งให้ OpenCV ประมวลผลภาพ",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "opencv/cmd/process",
+        "payload": "START",
+        "payloadType": "str",
+        "x": 240,
+        "y": 140,
+        "wires": [
+            [
+                "a0845c56.300ab"
+            ]
+        ]
+    },
+    {
+        "id": "f34ab90.67d5348",
+        "type": "inject",
+        "z": "63bd7392.fd0a7c",
+        "name": "ทดสอบส่งข้อมูลที่ 1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "v1/devices/me/telemetry",
+        "payload": "{\"log\" : \"ข้อมุลชุดที่ 1\"}",
+        "payloadType": "str",
+        "x": 190,
+        "y": 100,
+        "wires": [
+            [
+                "91a89aa1.00e1f8"
+            ]
+        ]
+    },
+    {
+        "id": "91a89aa1.00e1f8",
+        "type": "mqtt out",
+        "z": "63bd7392.fd0a7c",
+        "name": "ส่งข้อมูลแบบ Telemetry ไปยัง thingsboard",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "9e4b6dd5.63eed",
+        "x": 560,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "9ad718a7.128d88",
+        "type": "inject",
+        "z": "63bd7392.fd0a7c",
+        "name": "ทดสอบส่งข้อมูลที่ 2",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "v1/devices/me/telemetry",
+        "payload": "{\"log\" : \"ข้อมุลชุดที่ 2\"}",
+        "payloadType": "str",
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "91a89aa1.00e1f8"
+            ]
+        ]
+    },
+    {
+        "id": "8e508d05.d71f5",
+        "type": "mqtt in",
+        "z": "63bd7392.fd0a7c",
+        "name": "รับคำสั่ง (RPC) จาก thingsboard",
+        "topic": "v1/devices/me/rpc/request/+",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "9e4b6dd5.63eed",
+        "x": 210,
+        "y": 280,
+        "wires": [
+            [
+                "acd20f73.bb884"
+            ]
+        ]
+    },
+    {
+        "id": "acd20f73.bb884",
+        "type": "debug",
+        "z": "63bd7392.fd0a7c",
+        "name": "แสดงข้อมูลในตัวแปร msg.payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "4b08016f.baf8c",
+        "type": "debug",
+        "z": "34577fb7.665e6",
+        "name": "แสดงข้อมูลทั้งหมดในตัวแปร msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "8861d813.c9d5f8",
+        "type": "debug",
+        "z": "34577fb7.665e6",
+        "name": "แสดงข้อมูลทั้งหมดในตัวแปร msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "4ab03d6d.a67e84",
+        "type": "debug",
+        "z": "34577fb7.665e6",
+        "name": "แสดงข้อมูลทั้งหมดในตัวแปร msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "d8653621.5281b8",
+        "type": "comment",
+        "z": "34577fb7.665e6",
+        "name": "อุณหภูมิ",
+        "info": "",
+        "x": 210,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "e1609d30.57ebc",
+        "type": "link in",
+        "z": "34577fb7.665e6",
+        "name": "",
+        "links": [
+            "e84f283e.3c30e8"
+        ],
+        "x": 75,
+        "y": 640,
+        "wires": [
+            [
+                "c45fdc5e.906a8"
+            ]
+        ]
+    },
+    {
+        "id": "c45fdc5e.906a8",
+        "type": "change",
+        "z": "34577fb7.665e6",
+        "name": "เก็บค่าที่อ่านได้ลงในตัวแปร machine_temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "machine_temperature",
+                "pt": "global",
+                "to": "temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a0845c56.300ab",
+        "type": "mqtt out",
+        "z": "fe8f35d3.732268",
+        "name": "Factory MQTT Broker",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "abd216b1.5bdf98",
+        "x": 600,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "45f07d9d.e95614",
+        "type": "mqtt in",
+        "z": "fe8f35d3.732268",
+        "name": "อ่านค่าสีจาก OpenCV",
+        "topic": "opencv/color",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "abd216b1.5bdf98",
+        "x": 210,
+        "y": 380,
+        "wires": [
+            [
+                "2403909b.9008b"
+            ]
+        ]
+    },
+    {
+        "id": "2403909b.9008b",
+        "type": "debug",
+        "z": "fe8f35d3.732268",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "e0611304.0076e",
+        "type": "inject",
+        "z": "34577fb7.665e6",
+        "name": "สั่งให้ Conveyor หยุดการทำงาน",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "str",
+        "x": 180,
+        "y": 60,
+        "wires": [
+            [
+                "864c2aa.bf9fdd8"
+            ]
+        ]
+    },
+    {
+        "id": "2c1423ea.e39dbc",
+        "type": "inject",
+        "z": "34577fb7.665e6",
+        "name": "สั่งให้ Conveyor เริ่มการทำงาน",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "str",
+        "x": 180,
+        "y": 100,
+        "wires": [
+            [
+                "864c2aa.bf9fdd8"
+            ]
+        ]
+    },
+    {
+        "id": "864c2aa.bf9fdd8",
+        "type": "debug",
+        "z": "34577fb7.665e6",
+        "name": "แสดงข้อมูลในตัวแปร msg.payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "e09eebe1.9781d8",
+        "type": "inject",
+        "z": "63bd7392.fd0a7c",
+        "name": "เริ่มคำนวน",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 140,
+        "y": 520,
+        "wires": [
+            [
+                "32f93a3a.b53696"
+            ]
+        ]
+    },
+    {
+        "id": "7691cc0f.88dd24",
+        "type": "inject",
+        "z": "7c7c6064.4c077",
+        "name": "ทำงานอัตโนมัติทุก 1 วินาที",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 520,
+        "wires": [
+            [
+                "55ebdf34.ce194"
+            ]
+        ]
+    },
+    {
+        "id": "32f93a3a.b53696",
+        "type": "function",
+        "z": "63bd7392.fd0a7c",
+        "name": "คำนวนระยะเวลาที่เครื่องจักทำงาน",
+        "func": "// อ่านค่าเวลาเริ่มต้นระบบ\nvar time_start      = global.get(\"time_start\");\n\n// อ่านค่าเวลาปัจจุบัน\nvar time_current    = global.get(\"time_current\");\n\n// คำนวนหาผลต่างของเวลา (millisecond)\nvar time_delta  = time_current - time_start;\n\n// แปลงเวลาจากหน่วย millisecond เป็น second\n// เก็บผลลัพธ์ลงในตัวแปร msg.payload\nmsg.payload = time_delta / 1000;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 430,
+        "y": 520,
+        "wires": [
+            [
+                "4cff3354.3bf80c"
+            ]
+        ]
+    },
+    {
+        "id": "4cff3354.3bf80c",
+        "type": "debug",
+        "z": "63bd7392.fd0a7c",
+        "name": "แสดงข้อมูลในตัวแปร msg.payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 520,
+        "wires": []
+    }
+]

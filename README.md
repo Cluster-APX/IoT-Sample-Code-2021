@@ -41,3 +41,9 @@
 ตัวอย่าง Code สำหรับอ่านค่าจาก Proximity Sensor จำนวน 1 ตัว เพื่อนับจำนวนที่ตรวจจับวัตถุได้ และส่งผลลัพธ์ไปยัง Local Broker
 
 - [ตัวอย่าง Code คลิกที่นี้](node-red/Counter.json)
+
+### System Integration
+
+ตัวอย่าง Code สำหรับระบบอัตโนมัติควบคุมการนับชิ้นงานในสายการผลิตและเชื่อมโยงการสื่อสารต่าง ๆ กับ Thingsboard  ระบบดังกล่าวเป็นการรวมระบบย่อยหลาย ๆ อย่างเข้าด้วยกัน ได้แก่ Microcontroller, Computer Vision และ IoT
+
+- [ตัวอย่าง Code คลิกที่นี้](node-red/System%20Integration.json)
