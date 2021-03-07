@@ -60,6 +60,8 @@ void loop()
   }
 
 
+  // Protocol=\r<temperature> <proximity in> <proximity out>\n
+
   Serial.print("\r");
 
   DATA_ANA_0  = analogRead(IN_ANA_0); // อ่านค่า Analog
@@ -71,6 +73,7 @@ void loop()
   Serial.print(" ");
 
   DATA_DIGI_1  = digitalRead(IN_DIGI_1); // อ่านค่า Digital
+  DATA_DIGI_1 = (~DATA_DIGI_1) & 1;
   Serial.print(DATA_DIGI_1); // ส่งค่า Digital ที่อ่านได้ไปยัง Serial Port
 
   Serial.print("\n");
